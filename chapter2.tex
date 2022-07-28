@@ -33,15 +33,15 @@
  		\caption{نمای سه بعدی طرح - پشت}
  		%\label{fig:stm32_real}
  	\end{subfigure}\\
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}{0.4\textwidth}
 		\centering
 		\includegraphics[width=0.9\linewidth]{pcb_real_mounted}
 		\caption{\pcbf مونتاژ شده}
 		%\label{fig:stm32_image}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}{0.4\textwidth}
 		\centering
-		\includegraphics[width=0.9\linewidth]{pcb_real_raw}
+		\includegraphics[width=\linewidth]{pcb_real_raw}
 		\caption{\pcbf خام}
 		%\label{fig:stm32_image}
 	\end{subfigure}
@@ -107,13 +107,13 @@
 
 \begin{figure}[h]
 	\centering
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}{0.4\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{hc05_real}
 		\caption{جداگانه}
 		\label{fig:hc05_image}
 	\end{subfigure}
-	\begin{subfigure}{0.45\textwidth}
+	\begin{subfigure}{0.5\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{hc05_mounted}
 		\caption{مونتاژ شده روی برد پروژه}
@@ -154,8 +154,10 @@
 	\caption{تصاویر مربوط به درگاه ارتباط سریال}
 \end{figure}
 
-\section{حسگر پالس‌اکسی‌متر}
-\newpage
+\section{حسگر \lr{PPG}}
+در ابتدا ساختار کلی حسگرهای
+ \lr{PPG}\footnote{\lr{Photoplethysmogram} یا تغییرحجم‌سنجی نوری}
+را بررسی می‌کنیم. 
 
 \section{حسگر شتاب خطی و سرعت زاویه‌ای}
 برای اندازه‌گیری مشخصه‌های حرکتی باید سراغ
@@ -186,14 +188,155 @@
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\textwidth]{sch_gyro}
+	\includegraphics[width=0.95\textwidth]{sch_gyro}
 	\caption{شماتیک مربوط به بخش حسگر حرکتی}
 	\label{fig:sch-gyro}
 \end{figure}
 
 \section{صفحه نمایش}
+صفحه‌ی نمایش از اصلی‌ترین قسمت‌های یک ساعت هوشمند است. صفحه‌ی نمایش باید مصرف کمی داشته باشد، راه‌اندازی آن دشوار نباشد و تعداد پایه‌ی زیادی هم نیاز نداشته باشد تا بتوان آن را در ساعت استفاده کرد. از این رو یک صفحه‌ی نمایش\lr{OLED}\footnote{صفحه‌ی نمایش‌های \lr{OLED} اینگونه هستند که فقط پیکسل‌های موردنیاز روشن می‌شوند و دیگر نیازی نیست که نور پشتی به تمام پیکسل‌ها بتابد تا دیده شوند. این نوع نمایشگرها مصرف کمتر و زیبایی بیشتری دارند.} 3.1 اینچی با ابعاد 64 در 128 پیکسل انتخاب شد که به کمک درایور \lr{SSD1306} راه‌اندازی می‌شود. شکل \ref{fig:oled_image} تصویر این نمایشگر و شکل \ref{fig:oled_real} تصویر محل اتصال سیم‌های آن را بر روی \pcbf ساعت نشان می‌دهد.
 
-\section{مدار شارژ و مدیریت توان}
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{oled_image}
+		\caption{جداگانه}
+		\label{fig:oled_image}
+	\end{subfigure}
+	\begin{subfigure}{0.44\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{oled_real}
+		\caption{محل اتصال نمایشگر روی برد پروژه}
+		\label{fig:oled_real}
+	\end{subfigure}
+	\caption{تصاویر صفحه‌ی نمایش}
+	%	\label{fig:hc05}
+\end{figure}
+
+شکل \ref{fig:sch-oled} شماتیک مداری بخش نمایشگر را نشان می‌دهد. درگاه ارتباطی این نمایشگر، باس \lr{I2C} است. به همین دلیل \lr{I2C1} پردازنده به این حسگر متصل است.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{sch_oled}
+	\caption{شماتیک مربوط به بخش نمایشگر}
+	\label{fig:sch-oled}
+\end{figure}
+
+\section{تغذیه و مدیریت توان}
+بخش تغذیه و مدیریت توان این ساعت هوشمند از دو قسمت تشکیل شده است. بخش تغذیه که شامل باتری است و بخش شارژ که وظیفه‌ی شارژ باتری و تغذیه‌ی مدار را در صورت اتصال شارژر بر عهده دارد.
+
+\subsection{باتری}
+برای انتخاب باتری قیودی چون ظرفیت، ولتاژ، ابعاد و قیمت مطرح است. باتری‌ای برای این پروژه مناسب است که در حداقل ابعاد، حداکثر ظرفیت را داشته باشد، در بازار موجود باشد، قیمت مناسبی داشته باشد و یک سلول باشد (ولتاژ 7.3 ولت). با این تفاسیر باتری‌ای که در شکل \ref{fig:battery} مشاهده می‌شود برای این پروژه انتخاب شد. یک باتری لیتیوم-یون یک سلولی که ولتاژ نامی آن 7.3 ولت است با ظرفیت 400 میلی‌آمپرساعت.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{battery}
+	\caption{باتری انتخاب شده برای پروژه}
+	\label{fig:battery}
+\end{figure}
+
+\subsection{شارژ و مدیریت توان}
+برای شارژ باتری از یک آیسی شارژ به نام \lr{TP4056} استفاده شده است که می‌تواند باتری‌های لیتیومی را شارژ کند. در کنار آن یک آیسی کنترلر به نام \lr{DW01} قرار دارد که ولتاژ باتری را پایش می‌کند. باتری های یک سلولی ولتاژ نامی 7.3 ولت دارند. اما در حالت شارژ کامل حدود 2.4 و در حالت خالی حدود 3 ولت هستند. این کنترلر وظیفه دارد در صورت تجاوز ولتاژ باتری از این محدوده، آن را به کمک دو ماسفت از مدار خارج کند. اینگونه باتری هیچگاه دچار اضافه ولتاژ\footnote{\lr{Over voltage}} یا کمبود ولتاژ\footnote{\lr{Under voltage}} نمی‌شود و آسیبی نمی‌بیند. این مدارات در شکل \ref{fig:charge} قابل مشاهده‌اند.
+
+تغذیه‌ی مدارهای ساعت از یک رگولاتور 3.3 ولت تأمین می‌شود. بحث مدیریت توان به این مسئله می‌پردازد که ورودی این رگولاتور از کدام مسیر تغذیه شود. هنگامی که باتری شارژ دارد و شارژر متصل نیست، باید ورودی باتری مستقیما به رگولاتور وارد شود. هنگامی که شارژر متصل می‌شود، باید ورودی برق شارژر مستقیما به رگولاتور برود و باتری از مدار خارج شود که از طریق برق ورودی شارژ شود. این تغییر مسیر و جابجایی توسط یک ماسفت \lr{AO3401} صورت می‌گیرد.
+
+این ماسفت یک ماسفت \lr{P-Channel} است. در صورتی هدایت می‌کند که شرط
+\lr{$V_{GS}<V_{th}=-0.9$}
+برقرار باشد. حال به شکل \ref{fig:sup-switch} توجه کنید. در صورتی که برق ورودی (5 ولت) متصل باشد، ولتاژ گیت 5 ولت می‌شود. از طرفی ورودی رگولاتور از طریق دیود \lr{D2} که شاتکی است و 2.0 ولت افت دارد، متصل شده است. در این صورت
+\lr{$V_{GS}$}
+2.0 ولت است و باعث می‌شود که ماسفت قطع شود. در این حالت ولتاژ سورس حدود .4 است. از آنجا که ولتاژ باتری نهایتا 3.4 ولت است لذا دیود داخلی ماسفت نیز هدایت نمی‌کند و همه چیز درست است. حال اگر تغذیه‌ی خارجی قطع شود؛ گیت ماسفت به دلیل وجود مقاومتِ \lr{Pull-Down} صفر می‌شود. اکنون کافی است تا ولتاژ سورس اندکی مثبت شود (حدود 9.0 ولت) تا ماسفت هدایت کند. این ولتاژ از طریق دیود داخلی ماسفت از سمت باتری ایجاد می‌شود. حالا ماسفت روشن است و ورودی رگولاتور از طریق باتری تغذیه می‌شود.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.45\textwidth]{sup_switch}
+	\caption{شماتیکی ساده برای توضیح بخش مدیریت توان}
+	\label{fig:sup-switch}
+\end{figure}
+
+به طور خلاصه می‌توان حالات کاری مدار را اینگونه توضیح داد:
+\begin{enumerate}
+	\item شارژر متصل است: ماسفت خاموش است، باتری از مدار خارج شده و به شارژر متصل است
+	\item 	شارژر متصل نیست: ماسفت روشن است، باتری در مدار است و به شارژر متصل نیست 
+\end{enumerate}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{sch_charg}
+		\caption{شماتیک مدار شارژ و مدیریت توان}
+		%\label{fig:vib_image}
+	\end{subfigure}\\
+	\begin{subfigure}{\textwidth}
+		\centering
+		\includegraphics[width=0.5\linewidth]{charge_real}
+		\caption{مونتاژ شده روی برد پروژه به همراه جای باتری}
+		%\label{fig:vib_real}
+	\end{subfigure}
+	\caption{تصاویر بخش تغذیه}
+	\label{fig:charge}
+\end{figure}
+
+\section{کلیدهای لمسی}
+بر روی بدنه‌ی ساعت و زیر صفحه‌ی اصلی، چهار سیم‌پیچ تعبیه شده است که باید بتوان با لمس آن‌ها، با ساعت تعامل کرد و به آن ورودی داد. برای راه‌اندازی این کلیدها از یک آیسی به نام \lr{BS14A-1} استفاده شده است. این آیسی ساخت شرکت \lr{Holtek} است و یکی از بهترین گزینه‌ها برای راه‌اندازی کلید لمسی است. شکل \ref{fig:touch_image} تصویر این موتور و شکل \ref{fig:touch_real} تصویر آن را بر روی \pcbf ساعت نشان می‌دهد.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.35\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{touch_image}
+		\caption{جداگانه}
+		\label{fig:touch_image}
+	\end{subfigure}
+	\begin{subfigure}{0.4\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{touch_real}
+		\caption{مونتاژ شده روی برد پروژه}
+		\label{fig:touch_real}
+	\end{subfigure}
+	\caption{تصاویر بخش کلیدهای لمسی}
+	%	\label{fig:hc05}
+\end{figure}
+
+شکل \ref{fig:sch-touch} شماتیک مداری بخش کلیدهای لمسی را نشان می‌دهد. این آیسی ده پایه است. دو پایه برای تغذیه دارد، 4 پایه برای اتصال به کلیدها و 4 پایه برای اتصال به پردازنده. برای تنظیم حساسیت کلیدها می‌توان از خازن‌هایی موازی کلیدها بهره برد. در اینجا خازنی روی برد قرار نگرفته است زیرا نیازی به کاهش حساسیت نبود.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{sch_touch}
+	\caption{شماتیک مربوط به بخش کلیدهای لمسی}
+	\label{fig:sch-touch}
+\end{figure}
+
+\section{بازر}
+برای ایجاد صدا و هشدارهای صوتی در ساعت، از یک بازر غیرفعال\footnote{\lr{Passive}} استفاده شده است. بازرهای پسیو، بازرهایی هستند که نوسان‌ساز \footnote{\lr{Oscillator}} داخلی ندارند و تنها با خاصیت پیزوالکتریک \footnote{\lr{Piezoelectric}} کار می‌کنند. بدین صورت که اگر ولتاژ به آن اعمال شود، صفحه‌ی آن جابجا می‌شود و با قطع ولتاژ به مکان اولیه باز می‌گردد. حال اگر این قطع و وصل ولتاژ با فرکانس مشخصی صورت گیرد، بازر نیز صدایی با همان فرکانس تولید می‌کند. بدیهی است که هارمونیک‌های بالاتر نیز در این صدا وجود دارد زیرا موج ورودی به بازر مربعی است؛ اما فرکانس غالب همان فرکانس اصلی موج مربعی خواهد بود. شکل \ref{fig:buz_image} تصویر بازر و شکل \ref{fig:buz_real} تصویر آن را بر روی \pcbf ساعت نشان می‌دهد.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.35\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{buz_image}
+		\caption{جداگانه}
+		\label{fig:buz_image}
+	\end{subfigure}
+	\begin{subfigure}{0.35\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{buz_real}
+		\caption{مونتاژ شده روی برد پروژه}
+		\label{fig:buz_real}
+	\end{subfigure}
+	\caption{تصاویر بازر}
+	%	\label{fig:hc05}
+\end{figure}
+
+شکل \ref{fig:sch-buz} شماتیک مداری بخش بازر را نشان می‌دهد. برای راه‌اندازی بازر و تولید صدا، از یک سوییچ ماسفت برای قطع و وصل ولتاژ استفاده شده است. دیودی که با بازر موازی شده از ورود جریان برگشتی آن به ماسفت هنگام قطع و وصل ولتاژ جلوگیری می‌کند. برای کنترل فرکانس صدا می‌توان از اعمال موج \lr{PWM} به بازر بهره برد. لذا پایه‌ی فرمان این مدار به خروجی \lr{PWM} تایمر 3 در پردازنده متصل شده است.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\textwidth]{sch_buz}
+	\caption{شماتیک مربوط به بخش بازر}
+	\label{fig:sch-buz}
+\end{figure}
 
 \section{موتور ایجاد لرزش}
 برای ایجاد لرزش\footnote{\lr{Vibration}} در ساعت، مشابه تلفن‌های همراه، از یک موتور مخصوص استفاده شده است. موتورهای ایجاد لرزش معمولا یک موتور \lr{DC} ساده هستند که یک بار نامتقارن به آن‌ها متصل است. از آنجا که مرکز جرم این بار خارج از شفت موتور است، چرخش آن باعث ایجاد گشتاوری دوار می‌شود که لرزش را ایجاد می‌کند. شکل \ref{fig:hc05_image} تصویر این موتور و شکل \ref{fig:hc05_real} تصویر آن را بر روی \pcbf ساعت نشان می‌دهد.
@@ -213,20 +356,14 @@
 		\label{fig:vib_real}
 	\end{subfigure}
 	\caption{تصاویر موتور ایجاد لرزش}
-%	\label{fig:hc05}
+	%	\label{fig:hc05}
 \end{figure}
 
-شکل \ref{fig:sch-vib} شماتیک مداری بخش ایجاد لرزش را نشان می‌دهد. این موتور برای کار به 90 میلی آمپر جریان الکتریکی احتیاج دادر. طبیعتا پردازنده نمی‌تواند این جریان را تأمین کند. لذا از یک سوییچ ماسفت
-\footnote{\lr{Metal–Oxide–Semiconductor Field-Effect Transistor}}
- برای قطع و وصل موتور استفاده شده است. دیودی که با موتور موازی شده از ورود جریان برگشتی موتور به ماسفت هنگام خاموش شدن موتور جلوگیری می‌کند. برای کنترل سرعت موتور می‌توان از اعمال موج \lr{PWM}\footnote{\lr{Pulse Width Modulation}} به موتور بهره برد. لذا پایه‌ی فرمان این مدار به خروجی \lr{PWM} تایمر 1 در پردازنده متصل شده است.
+شکل \ref{fig:sch-vib} شماتیک مداری بخش ایجاد لرزش را نشان می‌دهد. این موتور برای کار به 90 میلی‌آمپر جریان الکتریکی احتیاج دارد. طبیعتا پردازنده نمی‌تواند این جریان را تأمین کند. لذا از یک کلید ماسفت\footnote{\lr{Metal–Oxide–Semiconductor Field-Effect Transistor}} برای قطع و وصل موتور استفاده شده است. دیودی که با موتور موازی شده از ورود جریان برگشتی موتور به ماسفت هنگام خاموش شدن موتور جلوگیری می‌کند. برای کنترل سرعت موتور می‌توان از اعمال موج \lr{PWM}\footnote{\lr{Pulse Width Modulation}} به موتور بهره برد. لذا پایه‌ی فرمان این مدار به خروجی \lr{PWM} تایمر 1 در پردازنده متصل شده است.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.52\textwidth]{sch_vib}
+	\includegraphics[width=0.3\textwidth]{sch_vib}
 	\caption{شماتیک مربوط به بخش ایجاد لرزش}
 	\label{fig:sch-vib}
 \end{figure}
-
-\section{بازر}
-
-\section{کلیدهای لمسی}
