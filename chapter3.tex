@@ -123,7 +123,7 @@
 			\centering
 			\includegraphics[width=\linewidth]{body_pcb}
 			\caption{نمای بیرونی}
-			%\label{fig:oled_real}
+			\label{fig:body-pcb-out}
 		\end{subfigure}
 		\caption{تصاویر محل نصب \pcbf در بدنه}
 		\label{fig:body-pcb}
@@ -174,9 +174,190 @@
 	\item ابعاد دقیق طرح در بخش‌های بعدی تشریخ خواهد شد؛ اما در مورد تناسب ابعاد، قطر دایره‌ی این ساعت حدود 5 سانتی‌متر است که در مقایسه با ساعت‌های موجود در بازار، مقدار بزرگی نیست و معقول است.
 \end{enumerate}
 
+در نهایت تصویر بدنه‌ی اصلی در شکل \ref{fig:body-real} دیده می‌شود. چاپ این نسخه توسط شرکت \lr{PCBWay}\cite{PCBWay} به رایگان انجام شده است. جنس بدنه از رزین است که باعث می‌شود شفاف باشد و داخل آن دیده شود.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\linewidth]{body_real2}
+		\caption{تصویر چاپ شده‌ی نسخه‌ی نهایی بدنه از جنس رزین و شفاف}
+		\label{fig:body-real}
+	\end{figure}
 
 \section{دریچه‌ی پشتی}
+دریچه‌ی پشتی وظیفه دارد تا بر پشت بدنه‌ی اصلی نصب شود و قطعات و تجهیزات داخل ساعت را محافظت کند. از طرفی محل نصب حسگر \lr{PPG} نیز هست. این دو وظیفه را شرح می‌دهیم.
 
+\begin{enumerate}
+	\item اتصال به بدنه‌ی اصلی:
+	برای اتصال به بدنه‌ی اصلی، چهار استوانه‌ی کوچک بر روی دریچه طراحی شده ‌است. این استوانه‌ها منطبق بر سوراخ‌های روی بدنه است. این سوراخ‌ها در شکل \ref{fig:body-pcb-out} به خوبی دیده می‌شوند. بدین شکل دریچه به بدنه متصل می‌شود. تصویر دریچه در شکل \ref{fig:body-back2main} نشان داده شده‌است.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.7\linewidth]{body_back2main}
+		\caption{تصویر استوانه‌های اتصال دریچه به بدنه}
+		\label{fig:body-back2main}
+	\end{figure}
+	
+	\item اتصال حسگر \lr{PPG}:
+	حسگر باید جایی نصب شود که با پوست تماس مستقیم داشته باشد. لذا بر روی دریچه سوراخ مستطیل شکلی ایجاد شده است تا محل نصب حسگر باشد. دو زائده‌ی کوچک نیز در نزدیکی آن قرار دارد تا منطبق بر سوراخ‌های روی حسگر باشد. این سوراخ‌ها در شکل \ref{fig:ppg_image} قابل مشاهده ‌اند. شکل \ref{fig:body-ppg} محل نصب حسگر را نشان می‌دهد.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}{0.35\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{body_ppg}
+			\caption{نمای درونی}
+			%\label{fig:oled_image}
+		\end{subfigure} 
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{body_ppg2}
+			\caption{نمای بیرونی}
+			%\label{fig:oled_real}
+		\end{subfigure}
+		\caption{تصاویر محل نصب حسگر \lr{PPG}}
+		\label{fig:body-ppg}
+	\end{figure}
+
+\end{enumerate}
+
+در نهایت تصویر دریچه‌ی پشتی در شکل \ref{fig:body-back-reel} دیده می‌شود. چاپ این نسخه نیز توسط شرکت \lr{PCBWay}\cite{PCBWay} به رایگان انجام شده است. جنس بدنه از رزین است که باعث می‌شود شفاف باشد و داخل آن دیده شود.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\linewidth]{body_real4}
+		\caption{تصویر چاپ شده‌ی نسخه‌ی نهایی دریچه‌ی پشتی از جنس رزین و شفاف}
+		\label{fig:body-back-reel}
+	\end{figure}
 
 \section{اتصالات}
+ تمامی اتصالات مکانیکی در این بخش توضیح داده می‌شود.
+ 
+ \subsection{کلیدهای لمسی}
+ باید چهار قطعه سیم به شکل حلقوی سیم پیچی شده و از داخل به بدنه‌ی اصلی چسبانده شود. بدین منظور از سیم‌های وایر رپ\footnote{\lr{Wire wrap}} استفاده شده است. همانطور که در شکل \ref{fig:conn-touch} دیده می‌شود این سیم‌ها به کمک چسب نواری به بدنه‌ی اصلی متصل شده‌اند. کلیدهای لمسی به کمک خاصیت خازنی کار می‌کنند. سر دیگر سیم‌ها به محل اتصال کلیدهای لمسی در شکل \ref{fig:touch_real} لحیم می‌شوند.
+ 
+با توجه به این که می‌توان لایه‌ی نازک فوقانی را به صورت یک دی‌الکتریک برای خازن در نظر گرفت، می‌توان گفت با اینکه کلیدهای پشت صفحه نصب شده‌اند اما باز هم به درستی کار خواهند کرد. 
 
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{conn-touch}
+			\caption{یک کلید نصب شده بر پشت سطح فوقانی}
+			%\label{fig:oled_image}
+		\end{subfigure} 
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{conn-touch2}
+			\caption{چهار کلید نصب شده در چهار سمت بدنه}
+			%\label{fig:oled_real}
+		\end{subfigure}
+		\caption{تصاویر اتصال کلیدهای لمسی به بدنه}
+		\label{fig:conn-touch}
+	\end{figure}
+
+\subsection{صفحه نمایش}
+همانطور که بالاتر بحث شد، صفحه نمایش با قرار گیری در سه استوانه‌ی موجود در بدنه سر جای خود محکم می‌شود. شکل \ref{fig:conn-oled} گویای این موضوع است.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\linewidth]{conn_oled}
+		\caption{تصویر اتصال صفحه نمایش به بدنه}
+		\label{fig:conn-oled}
+	\end{figure}
+
+\subsection{\pcbf}
+همانطور که بالاتر بحث شد، \pcbf با قرار گیری روی سه زائده‌ی موجود در بدنه سر جای خود محکم می‌شود. شکل \ref{fig:conn-pcb} گویای این موضوع است.
+
+علت آن که برای اتصال صفحه نمایش یک استوانه از چهار استوانه حذف شده است آن است که استوانه‌ی حذف شده دقیقا بالای موتور ایجاد لرزش قرار داشت و در صورت وجود، به آن گیر می‌کرد و مانع جا گیری صحیح \pcbf می‌شد.
+
+برای جلوگیری از اتصال ناخواسته و اتصال کوتاه بین صفحه نمایش و \pcbf، یک ورق نازک فوم بین این دو قرار گرفته است.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\linewidth]{conn_pcb}
+		\caption{تصویر اتصال \pcbf به بدنه}
+		\label{fig:conn-pcb}
+	\end{figure}
+
+\subsection{باتری}
+باتری ساعت به کمک نوار چسب به \pcbf می‌چسبد و در جای خود محکم می‌شود. سیم‌های آن به محل خود لحیم شده و اتصال برقرار می‌شود. شکل \ref{fig:conn-battery} این اتصال را نشان می‌دهد.
+
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}{0.5\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{conn_battery}
+			\caption{تصویر اتصال باتری در سالیدورکز}
+			%\label{fig:oled_image}
+		\end{subfigure} 
+		\begin{subfigure}{0.4\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{conn_battery2}
+			\caption{تصویر واقعی باتری و اتصال آن}
+			%\label{fig:oled_real}
+		\end{subfigure}
+		\caption{تصاویر اتصال باتری}
+		\label{fig:conn-battery}
+	\end{figure}
+
+\subsection{حسگر \lr{PPG}}
+این حسگر روی دریچه‌ی پشتی نصب می‌شود. همانطور که در شکل \ref{fig:conn-ppg} مشاهده می‌شود این حسگر به دریچه متصل است و سمت دیگر آن در جای مخصوص خود به \pcbf اتصال دارد. سوراخ مستطیل شکل روی دریچه و ضخامت مناسب آن باعث می‌شود سطح حسگر مماس سطح بیرونی دریچه باشد. اینگونه نه بیرون زدگی دارد تا آسیب ببیند و نه سطح آن از پوست فاصله می‌گیرد.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.405\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{conn_ppg}
+		\caption{نمای درونی}
+		%\label{fig:oled_image}
+	\end{subfigure} 
+	\begin{subfigure}{0.4\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{conn_ppg2}
+		\caption{نمای بیرونی}
+		%\label{fig:oled_real}
+	\end{subfigure}
+	\caption{تصاویر اتصال حسگر \lr{PPG}}
+	\label{fig:conn-ppg}
+\end{figure}
+
+\subsection{دریچه‌ی پشتی}
+دریچه‌ی پشتی مطابق با شکل \ref{fig:conn-back} به کمک چهار استوانه‌ی موجود روی آن به بدنه‌ی اصلی متصل می‌شود.
+
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}{0.5\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{conn_back}
+			\caption{تصویر اتصال دریچه در سالیدورکز}
+			%\label{fig:oled_image}
+		\end{subfigure} 
+		\begin{subfigure}{0.4\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{conn_back2}
+			\caption{تصویر واقعی دریچه و اتصال آن}
+			%\label{fig:oled_real}
+		\end{subfigure}
+		\caption{تصاویر اتصال دریچه‌ی پشتی}
+		\label{fig:conn-back}
+	\end{figure}
+
+در نهایت بدنه و مکانیک ساعت تکمیل شد و ظاهر نهایی ساعت به شکل \ref{fig:body-final} در آمد.
+
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}{0.4\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{body_full}
+			\caption{نمای رو}
+			%\label{fig:oled_image}
+		\end{subfigure} 
+		\begin{subfigure}{0.4\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{body_full2}
+			\caption{نمای زیر}
+			%\label{fig:oled_real}
+		\end{subfigure}
+		\caption{تصاویر بدنه‌ی کامل}
+		\label{fig:body-final}
+	\end{figure}
