@@ -87,18 +87,18 @@
 
 شروط بحث شده در بالا را برای نسخه‌ی نهایی بررسی می‌کنیم.
 \begin{enumerate}
-	\item محل نصب صفحه نمایش:\\
+	\item محل نصب صفحه نمایش: \\
 	از سمت بیرون یک مستطیل خالی شده است که تا صفحه نمایش در آن قرار گیرد. از داخل هم سه استوانه منطبق بر سه سوراخ صفحه نمایش وجود دارد تا آن را در جای خود نگه دارد. اگر به تصویر صفحه نمایش (شکل \ref{fig:oled_image}) دقت کنید، پایین آن زائده‌ای برای اتصال سیم‌های فلت به صفحه نمایش قرار دارد. این زائده به شکل یک برش مستطیلی کوچک از صفحه‌ی فوقانی بدنه جدا شده است. شکل \ref{fig:body-oled} این قسمت ها را به خوبی نشان می‌دهد.
 	
 	\begin{figure}[h]
 		\centering
-		\begin{subfigure}{0.4\textwidth}
+		\begin{subfigure}{0.45\textwidth}
 			\centering
 			\includegraphics[width=0.78\linewidth]{body_oled}
 			\caption{نمای درونی}
 			%\label{fig:oled_image}
 		\end{subfigure}
-		\begin{subfigure}{0.45\textwidth}
+		\begin{subfigure}{0.47\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{body_oled2}
 			\caption{نمای بیرونی}
@@ -107,19 +107,19 @@
 		\caption{تصاویر محل نصب صفحه نمایش در بدنه}
 		\label{fig:body-oled}
 	\end{figure}
-	
-	\item  جانمایی \pcbf و جلوگیری از چرخش آن:
-	بر روی \pcbf سه شیار کوچک وجود دارد. متناظر با آن روی بدنه نیز سه زائده با همان ابعاد تعبیه شده است. این سه زائده مانع چرخش \pcbf در جای خود می‌شوند. تصویر این نگه‌دارنده‌ها در شکل ؟ قابل مشاهده است.
+
+	\item  جانمایی \pcbf و جلوگیری از چرخش آن: \\
+	بر روی \pcbf سه شیار کوچک وجود دارد. متناظر با آن روی بدنه نیز سه زائده با همان ابعاد تعبیه شده است. این سه زائده مانع چرخش \pcbf در جای خود می‌شوند. تصویر این نگه‌دارنده‌ها در شکل \ref{fig:body-pcb} قابل مشاهده است.
 	
 	\begin{figure}[h]
 		\centering
-		\begin{subfigure}{0.4\textwidth}
+		\begin{subfigure}{0.44\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{body_pcb2}
 			\caption{نمای درونی}
 			%\label{fig:oled_image}
 		\end{subfigure}
-		\begin{subfigure}{0.45\textwidth}
+		\begin{subfigure}{0.44\textwidth}
 			\centering
 			\includegraphics[width=\linewidth]{body_pcb}
 			\caption{نمای بیرونی}
@@ -129,27 +129,27 @@
 		\label{fig:body-pcb}
 	\end{figure}
 	
-	\item محل اتصال کابل \lr{USB}:
+	\item محل اتصال کابل \lr{USB}: \\
 	بر سطح جانبی بدنه یک سوراخ مستطیل شکل به ابعاد کانکتور \lr{micro USB} تعبیه شده است. شکل \ref{fig:body-usb} محل آن روی بدنه را نمایش می‌دهد.
 
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.9\linewidth]{body_usb}
+		\includegraphics[width=0.75\linewidth]{body_usb}
 		\caption{تصویر محل اتصال \lr{USB} در بدنه}
 		\label{fig:body-usb}
 	\end{figure}
 	
-	\item محل عبور هوا:
+	\item محل عبور هوا: \\
 	در نزدیکی قطعات مدار شارژ سه شیار برای عبور هوا وجود دارد تا قطعات داخلی به علت بالا رفتن دما آسیب نبینند. این شیارها در شکل \ref{fig:body-air} قابل مشاهده‌اند.
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.9\linewidth]{body_air}
+		\includegraphics[width=0.75\linewidth]{body_air}
 		\caption{تصویر شیارهای عبور هوا}
 		\label{fig:body-air}
 	\end{figure}
 
-	\item محل اتصال بند
+	\item محل اتصال بند: \\
 	بندهای موردنظر برای این ساعت مربوط به ساعت هوشمند \lr{Haylou} است. این بندها از جنس پلاستیک هستند. برای اتصال بند به بدنه‌ی اصلی چهار بازوی کوچک به بدنه اضافه شده است. داخل آن‌ها سوراخ‌هایی کوچکی موجود است که پین بند در آن‌ها قرار گیرد. تصویر این بازوها و محل نصب پین را شکل \ref{fig:body-band} مشاهده می‌کنید.
 	
 	\begin{figure}[h]
@@ -235,7 +235,7 @@
  \subsection{کلیدهای لمسی}
  باید چهار قطعه سیم به شکل حلقوی سیم پیچی شده و از داخل به بدنه‌ی اصلی چسبانده شود. بدین منظور از سیم‌های وایر رپ\footnote{\lr{Wire wrap}} استفاده شده است. همانطور که در شکل \ref{fig:conn-touch} دیده می‌شود این سیم‌ها به کمک چسب نواری به بدنه‌ی اصلی متصل شده‌اند. کلیدهای لمسی به کمک خاصیت خازنی کار می‌کنند. سر دیگر سیم‌ها به محل اتصال کلیدهای لمسی در شکل \ref{fig:touch_real} لحیم می‌شوند.
  
-با توجه به این که می‌توان لایه‌ی نازک فوقانی را به صورت یک دی‌الکتریک برای خازن در نظر گرفت، می‌توان گفت با اینکه کلیدهای پشت صفحه نصب شده‌اند اما باز هم به درستی کار خواهند کرد. 
+با توجه به این که می‌توان لایه‌ی نازک فوقانی را به صورت یک دی‌الکتریک برای خازن در نظر گرفت، می‌توان گفت با اینکه کلیدها پشت صفحه نصب شده‌اند اما باز هم به درستی کار خواهند کرد. 
 
 	\begin{figure}[h]
 		\centering
