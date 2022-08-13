@@ -257,7 +257,7 @@
 \end{itemize}
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.3\linewidth]{state_ack} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\includegraphics[width=0.5\linewidth]{state_ack}
 		\caption{صفحه‌ی در انتظار تایید}
 		\label{fig:state-ack}
 	\end{figure}
@@ -273,7 +273,7 @@
 \end{itemize}
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.3\linewidth]{state_ack} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\includegraphics[width=0.5\linewidth]{state_hello}
 		\caption{صفحه‌ی خوش‌آمد گویی}
 		\label{fig:state-hello}
 	\end{figure}
@@ -301,7 +301,18 @@
 \end{itemize}
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.3\linewidth]{state_ack} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\begin{subfigure}{0.4\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{state_home}
+			\caption{در حالتی که اتصال با گوشی برقرار است}
+			%\label{fig:oled_image}
+		\end{subfigure}
+		\begin{subfigure}{0.4\textwidth}
+			\centering
+			\includegraphics[width=0.95\linewidth]{state_home_nc}
+			\caption{در حالتی که اتصال با گوشی برقرار نیست}
+			%\label{fig:oled_real}
+		\end{subfigure}
 		\caption{صفحه‌ی اصلی}
 		\label{fig:state-home}
 	\end{figure}
@@ -331,8 +342,19 @@
 \end{itemize}
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.3\linewidth]{state_ack} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		\caption{صفحه‌ی حسگر سلامت}
+		\begin{subfigure}{0.4\textwidth}
+			\centering
+			\includegraphics[width=0.98\linewidth]{state_bloody}
+			\caption{در حالتی که اتصال با گوشی برقرار است}
+			%\label{fig:oled_image}
+		\end{subfigure}
+		\begin{subfigure}{0.4\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{state_bloody_nc}
+			\caption{در حالتی که اتصال با گوشی برقرار نیست}
+			%\label{fig:oled_real}
+		\end{subfigure}
+		\caption{صفحه‌ی حسگر سامت}
 		\label{fig:state-bloody}
 	\end{figure}
 \subsubsection{حالت حسگر حرکتی}
@@ -356,7 +378,7 @@
 \end{itemize}
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.3\linewidth]{state_ack} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\includegraphics[width=0.5\linewidth]{state_pedomedo}
 		\caption{صفحه‌ی حسگر حرکتی}
 		\label{fig:state-pedomedo}
 	\end{figure}
@@ -380,7 +402,7 @@
 \end{itemize}
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.3\linewidth]{state_ack} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\includegraphics[width=0.5\linewidth]{state_about}
 		\caption{صفحه‌ی درباره‌ی ما}
 		\label{fig:state-about}
 	\end{figure}
@@ -401,12 +423,13 @@
 \end{itemize}
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.3\linewidth]{state_ack} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\includegraphics[width=0.5\linewidth]{state_alarm}
 		\caption{صفحه‌ی آلارم}
 		\label{fig:state-ringing}
 	\end{figure}
 
-
+تمامی اشکال موجود در صفحات پیکسل به پیکسل طراحی شده و از هیچ شکل آماده‌ای در این پروژه استفاده نشده است.
+\newpage
 \subsection{وقفه‌ها}
 منابع وقفه در این پروژه 5 چیز است:
 \begin{enumerate}
@@ -417,7 +440,7 @@
 		بعد از فعال شدن وقفه، با توجه به اینکه سیستم در چه حالتی از حالت‌های هفتگانه قرار دارد، توابع مشخصی اجرا می‌شوند. شرح کامل این اقدامات در بخش \ref{sec:fsm} داده شده است. شکل \ref{fig:exti} یک نمونه از این کدها را نشان می‌دهد.
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=0.4\linewidth]{exti}
+			\includegraphics[width=0.55\linewidth]{exti}
 			\caption{نمونه کدی از بخش وقفه‌ی خارحی}
 			\label{fig:exti}
 		\end{figure}
@@ -438,7 +461,7 @@
 		این تایمر هر یک میلی ثانیه وقفه را فعال می‌کند. در روتین وقفه ابتدا اطلاعات حسگر حرکتی خوانده می‌شود. سپس این اطلاعات برای فیلتر شدن به توابع کالمن داده می‌شود. شرج این توابع در بخش‌هایی بعدی آورده شده است. سپس اطلاعات فیلتر شده وارد مرحله‌ی پردازش می‌شوند. این پردازش‌ها شامل تشخیص سرعت زاویه‌ای دست حول آرنج و تشخیص گام است. کد این بخش در شکل \ref{fig:kalman-code} قابل مشاهده است.
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=0.45\linewidth]{kalman_code}
+			\includegraphics[width=0.5\linewidth]{kalman_code}
 			\caption{نمونه کدی از بخش وقفه‌ی کالمن}
 			\label{fig:kalman-code}
 		\end{figure}
@@ -447,7 +470,7 @@
 		هرگاه وقفه‌ی این تایمر فعال شود به این معنی است که چهار ثانیه از آخرین تعامل کاربر با ساعت گذشته است و باید صفحه نمایش خاموش شود. شکل \ref{fig:screen-timer} کد این قسمت را نشان می‌دهد.
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=0.4\linewidth]{screen_timer}
+			\includegraphics[width=0.5\linewidth]{screen_timer}
 			\caption{کد روتین وقفه‌ی تایمر صفحه نمایش}
 			\label{fig:screen-timer}
 		\end{figure}
@@ -465,15 +488,80 @@
 	از طرفی می‌دانیم که اگر مقسوم‌علیه توان دو باشد، می‌توان عملیات تقسیم را با شیفت مقسوم انجام داد. در اینجا جای اینکه مجموع را بر 128 تقسیم کنیم، کافی است آن را 7 بیت به سمت راست شیفت دهیم تا تقسیم انجام شود. اینگونه هم سرعت بسیار بالایی دارد هم حافظه را بیهوده اشغال نمی‌کند.
 	\begin{figure}[h]
 		\centering
-		\includegraphics[width=0.4\linewidth]{adc_dma}
+		\includegraphics[width=0.5\linewidth]{adc_dma}
 		\caption{کد روتین وقفه‌ی \lr{DMA} مربوطه به \lr{ADC}}
 		\label{fig:adc-dma}
 	\end{figure}
 	\item وقفه‌ی \lr{DMA} مربوطه به \lr{UASRT}:
-	لرزاایذتسنیرذاسرذنتمذرنتسرد ترذنتسرذنت ذرتذر متبذر مشب
+	تنظیمات \lr{DMA} مربوط به \lr{USART} به گونه‌ای است که هرگاه تعداد 21 بایت داده توسط واحد ارتباط سریال (بلوتوث) دریافت شود، وقفه‌ی مربوطه فعال می‌‌شود. در روتین این وقفه این داده تحلیل می‌شود و بسته به نوع آن، اقدام مناسب با آن صورت می‌گیرد. جزئیات مربوط به بسته‌ها و نحوه‌ی کدگشایی آن‌ها در بخش \ref{sec:comm} توضیح داده خواهد شد.
 \end{enumerate}
 \subsection{لایه‌های نرم‌افزاری}
+ساختار کد به صورت لایه‌ای است. به این معنی که هر قطعه کد یا کتابخانه از توابع موجود در کتابخانه‌های لایه‌ی پایین استفاده می‌کند. شکل \ref{fig:sfarch} نحوه‌ی لایه‌بندی این پروژه را نشان می‌دهد.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{sfarch}
+	\caption{لایه‌های نرم‌افزاری}
+	\label{fig:sfarch}
+\end{figure}
 
-\section{ارتباطات}
+پایین‌ترین لایه، لایه‌ی سخت‌افزار است. رجیسترهایی که برای کار با سخت‌افزار مورد نیاز است در این لایه قرار دارد. از آنجا کار با رجیسترها به صورت مستقیم اگرچه در مواردی بهتر و بهینه‌تر است، اما دشواری‌هایی دارد که در اکثر موارد مانع استفاده از آن می‌شود. این پروژه نیز از این قاعده مستثنی نیست. برای ساده کردن کار با سخت‌افزار، از یک کتابخانه به نام
+\lr{HAL}\footnote{\lr{Hardware Abstraction Layer}}
+بهره بردیم که به کمک توابع موجود در آن کار با سخت‌افزار ساده می‌شود. بقیه‌ی لایه‌ها روی لایه‌ی \lr{HAL} سوار می‌شوند.
+
+دیگر لایه‌ها شامل کتابخانه‌هایی است که برای بخش‌های مختلف پروژه نوشته شده است. در ادامه به صورت کلی به توضیح این کتابخانه‌ها پرداخته می‌شود.
+
+\subsubsection{کتابخانه‌ی \lr{xfer}}
+این کتابخانه شامل دو تابع است که وظیفه‌ی ارسال داده‌ها از طریق سخت‌افزار را برعهده دارند. تصویر این توابع در شکل \ref{fig:xfer} دیده می‌شود.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{xfer}
+	\caption{توابع کتابخانه‌ی \lr{xfer}}
+	\label{fig:xfer}
+\end{figure}
+
+\subsubsection{کتابخانه‌ی \lr{fonts}}
+این کتابخانه شامل فونت‌ها و اشکالی است که روی صفحه نمایش نشان داده خواهند شد. تصویر بخشی از این کدها در شکل \ref{fig:fonts} دیده می‌شود.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{fonts}
+	\caption{بخشی از کتابخانه‌ی \lr{fonts}}
+	\label{fig:fonts}
+\end{figure}
+
+\newpage
+\subsubsection{کتابخانه‌ی \lr{notes}}
+این کتابخانه شامل نگاشتی از نت‌های موسیقی به فرکانس آن ها است. تصویر بخشی از این کدها در شکل \ref{fig:notes} دیده می‌شود.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\linewidth]{notes}
+	\caption{بخشی از کتابخانه‌ی \lr{notes}}
+	\label{fig:notes}
+\end{figure}
+
+\subsubsection{کتابخانه‌ی \lr{max30102}}
+این کتابخانه برای کار با حسگر \lr{PPG} است که توسط آقای \lr{Pan} نوشته شده است \cite{max30102}. شکل \ref{fig:max} نام توابع موجود در این کتابخانه را نشان می‌دهد.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{max30102}
+	\caption{پروتوتایپ توابع کتابخانه‌ی \lr{MAX30102}}
+	\label{fig:max}
+\end{figure}
+
+\newpage
+\subsubsection{کتابخانه‌ی \lr{MPU6050}}
+این کتابخانه برای کار با حسگر \lr{MPU6050} است که توسط آقای محمد یعقوب نوشته شده است \cite{mpu6050}. شکل \ref{fig:mpu} نام توابع موجود در این کتابخانه را نشان می‌دهد.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{mpu6050}
+	\caption{پروتوتایپ توابع کتابخانه‌ی \lr{MPU6050}}
+	\label{fig:mpu}
+\end{figure}
+
+\section{ارتباطات} \label{sec:comm}
 
 \section{پردازش داده‌های حسگر حرکتی}
