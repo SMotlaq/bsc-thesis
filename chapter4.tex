@@ -557,11 +557,285 @@
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\linewidth]{mpu6050}
+	\includegraphics[width=0.6\linewidth]{mpu6050}
 	\caption{پروتوتایپ توابع کتابخانه‌ی \lr{MPU6050}}
 	\label{fig:mpu}
 \end{figure}
 
-\section{ارتباطات} \label{sec:comm}
+\subsubsection{کتابخانه‌ی \lr{music}}
+در این کتابخانه موسیقی «ای ایران ای مرز پرگهر» به صورت نت‌های موسیقی نوشته شده است تا هنگام فعال شدن آلارم نواخته شود. شکل \ref{fig:music} این نت‌ها را نشان می‌دهد.
 
-\section{پردازش داده‌های حسگر حرکتی}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{eyiran}
+	\caption{نت‌های «ای ایران»}
+	\label{fig:music}
+\end{figure}
+
+\subsubsection{کتابخانه‌ی \lr{SSD1306}}
+این کتابخانه برای کار با صفحه نمایش‌های با درایور \lr{SSD1306} است که توسط آقای \lr{Olivier Van den Eede} نوشته شده است \cite{ssd1306}. شکل \ref{fig:ssd1306} نام توابع موجود در این کتابخانه را نشان می‌دهد.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{ssd1306}
+	\caption{پروتوتایپ توابع کتابخانه‌ی \lr{SSD1306}}
+	\label{fig:ssd1306}
+\end{figure}
+
+\subsubsection{کتابخانه‌ی \lr{Kalman}}
+در این کتابخانه توابع و روابط فیلتر کالمن پیاده‌سازی شده است. توضیحات مفصل این توابع در بخش \ref{sec:kalman} داده خواهد شد. شکل \ref{fig:kalman} نام توابع موجود در این کتابخانه را نشان می‌دهد.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{kalman}
+	\caption{پروتوتایپ توابع کتابخانه‌ی \lr{kalman}}
+	\label{fig:kalman}
+\end{figure}
+
+\subsubsection{کتابخانه‌ی \lr{Pages}}
+در این کتابخانه توابعی که بسته به حالت سیستم، صفحه‌ی مورد نظر را روی صفحه نمایش ترسیم می‌کنند. شکل \ref{fig:pages} نام توابع موجود در این کتابخانه را نشان می‌دهد.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\linewidth]{pages}
+	\caption{پروتوتایپ توابع کتابخانه‌ی \lr{pages}}
+	\label{fig:pages}
+\end{figure}
+
+\subsubsection{کتابخانه‌ی \lr{System}}
+می‌توان گفت این کتابخانه حیاتی‌ترین کتابخانه است. در این کتابخانه توابع مربوط به سیستم قرار دارد. همچنین یک ساختار\footnote{\lr{Struct}}
+تعریف شده تا متغیرهای سیستمی را شامل شود. شکل \ref{fig:system} نام توابع موجود در این کتابخانه و شکل \ref{fig:system_struct} تعریف این ساختار را نشان می‌دهد.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{0.95\textwidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{system}
+		\caption{پروتوتایپ توابع کتابخانه‌ی \lr{system}}
+		\label{fig:system}
+	\end{subfigure} \\
+	\begin{subfigure}{0.95\textwidth}
+		\centering
+		\includegraphics[width=0.8\linewidth]{system_struct}
+		\caption{متغیرهای \lr{struct} سیستم}
+		\label{fig:system_struct}
+	\end{subfigure}
+	\caption{تصاویر مربوطه به کتابخانه‌ی \lr{system}}
+\end{figure}
+
+\section{پردازش داده‌های حسگر حرکتی} \label{sec:kalman}
+دو مورد از وظایفی که برای ساعت تعریف شده است، شمردن تعداد گام‌ها و روشن کردن صفحه نمایش در صورت بالا آمدن دست است. برای انجام این وظایف از حسگر حرکتی \lr{MPU6050} استفاده شده است. اما می‌دانیم ادوات اندازه‌گیری دارای نویز و نایقینی‌های مختف هستند. حسگر فوق نیز از این قاعده مستثنی نیست. لذا قبل از هر چیز باید داده‌ی آن فیلتر شود تا نویزو اثرات مخرب دیگر تا جای ممکن بر پردازش‌ها اثر نگذارند. به این منظور یک فیلتر کالمن طراحی و پیاده‌سازی شده است. شکل \ref{fig:kalman-block} بلوک دیاگرام زیر سیستم تشخیص حرکت را نشان می‌دهد.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{kalman_block}
+	\caption{بلوک دیاگرام زیر سیستم تشخیص حرکت}
+	\label{fig:kalman-block}
+\end{figure}
+
+برای طراحی بلوک دیاگرام فوق، ابتدا نویز حسگر را بشناسیم. بدین منظور چند ثانیه از داده‌های حسگر توسط ساعت نمونه‌برداری شد و توسط بلوتوث به نرم‌افزار متلب ارسال شد. این نمونه‌ها به مدت یازده ثانیه ضبط شدند. در این مدت حرکات تصادفی و متنوعی را به ساعت اعمال کردم. شکل \ref{fig:mpu-raw} خروجی حسگر را در این مدت نشان می‌دهد.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{mpu_raw}
+	\caption{خروجی حسگر حرکتی. سه محور مربوط به شتاب خطی و سه محور مربوط به سرعت زاویه‌ای}
+	\label{fig:mpu-raw}
+\end{figure}
+
+همانطور که در خروجی حسگر مشهود است، مقدار نویز قابل توجه است و می‌تواند پردازش‌ها را دچار خطا کند. از این رو به طراحی فیلتر کالمن می‌پردازیم.
+
+\subsection{فیلتر کالمن}
+گام اول طراحی فیلتر کالمن، مدلسازی سیستم است. حسگر حرکتی سیستمی است کنترل نشده. لذا حلقه‌ی کنترلی‌ای در کار نیست. می‌توان گفت ورودی این حسگر شتاب حرکت دست است. در نتیجه سیستم شتاب سنج حسگر را می‌توان به صورت معادله‌ی \ref{eq:linmove} مدل کرد که در آن $x$ موقعیت، $v$ سرعت خطی، $a$ شتاب خطی و $T$ فاصله‌ی زمانی دو نمونه یا همان تناوب نمونه‌برداری یا گسسته‌سازی است.
+\begin{equation}
+	x[n+1] = \frac{1}{2}a[n]T^2 + v[n]T + x[n] 
+	\label{eq:linmove}
+\end{equation}
+
+سیستم سرعت زاویه‌ای نیز به طور مشابه به صورت معادله‌ی \ref{eq:rotmove} مدل می‌شود که در آن $\theta$ زاویه، $\omega$ سرعت زاویه‌ای، $\alpha$ شتاب زاویه‌ای و $T$ فاصله‌ی زمانی دو نمونه یا همان تناوب نمونه‌برداری یا گسسته‌سازی است.
+\begin{equation}
+	\theta[n+1] = \frac{1}{2}\alpha[n]T^2 + \omega[n]T + \theta[n] 
+	\label{eq:rotmove}
+\end{equation}
+
+از آنجا که حرکت دست، یا به عبارتی تغییرات شتاب خطی/زاویه‌ای نامشخص است، می‌توان آن را به صورت اغتشاش ورودی مدل کرد. در نتیجه تغییرات شتاب اغتشاشی است که به سیستم وارد می‌شود تا متغیرهای سیستم (موقعیت و سرعت) را تغییر دهد. بنابراین می‌توان فرم فضای حالت را برای این سیستم‌ها به صورت معادلات \ref{eq:sslin} و \ref{eq:ssrot} نوشت:
+
+\begin{gather}
+	\begin{bmatrix}
+		x[n+1] \\
+		v[n+1] \\
+		a[n+1]
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		1 & T & \frac{1}{2}T^2 \\
+		0 & 1 & T \\
+		0 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		x[n] \\
+		v[n] \\
+		a[n]
+	\end{bmatrix}
+	+
+	\begin{bmatrix}
+		0 \\
+		0 \\
+		1
+	\end{bmatrix}
+	w_{linear}[n]
+	\label{eq:sslin} \\
+	\begin{bmatrix}
+		\theta[n+1] \\
+		\omega[n+1] \\
+		\alpha[n+1]
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		1 & T & \frac{1}{2}T^2 \\
+		0 & 1 & T \\
+		0 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		\theta[n] \\
+		\omega[n] \\
+		\alpha[n]
+	\end{bmatrix}
+	+
+	\begin{bmatrix}
+		0 \\
+		0 \\
+		1
+	\end{bmatrix}
+	w_{rotational}[n]
+	\label{eq:ssrot}
+\end{gather}
+
+گام دوم مدلسازی مشاهده از حالت‌های سیستم است. همانطور که از معادلات فوق مشخص است، ماتریس‌های حالت ($\phi$) و ورودی ($G$) در هر دو حالت خطی و زاویه‌ای یکسان هستند و می‌توان مدل یکسانی به هر دو حرکت نسبت داد. اما از طرفی می‌دانیم که خروجی حسگر برای حالت خطی، شتاب و برای حالت زاویه‌ای، سرعت است. در نتیجه معادلات استاتیکی مشاهده به شکل معادلات \ref{eq:zlin} و \ref{eq:zrot} خواهند بود.
+
+\begin{gather}
+	z_{linear} = 
+	\begin{bmatrix}
+		0 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		x \\
+		v \\
+		a
+	\end{bmatrix}
+	+ v_{linear} 
+	\label{eq:zlin} \\
+	z_{rotational} = 
+	\begin{bmatrix}
+		0 & 1 & 0
+	\end{bmatrix}
+	\begin{bmatrix}
+		\theta \\
+		\omega \\
+		\alpha
+	\end{bmatrix}
+	+ v_{rotational} 
+	\label{eq:zrot}
+\end{gather}
+
+
+نکته‌ی مهمی در رابطه با حسگر سرعت زاویه‌ای وجود دارد. حسگرهای
+\lr{MEMS}\footnote{\lr{Micro-ElectroMechanical Systems}}
+که برای اندازه‌گیری سرعت زاویه‌ای استفاده می‌شوند، یک عبارت ثابت\footnote{\lr{Bias}} را در خروجی با مقدار واقعی جمع می‌کنند. این عبارت بایاس را می‌توان به عنوان یک حالت جدید به مدل سیستم افزود. در این حالت مدل نهایی به صورت معادلات \ref{eq:ssrot-bias} و \ref{eq:zrot-bias} خواهد بود.
+
+\begin{gather}
+	\begin{bmatrix}
+		\theta[n+1] \\
+		\omega[n+1] \\
+		\alpha[n+1] \\
+		b[n+1]
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		1 & T & \frac{1}{2}T^2 & 0\\
+		0 & 1 & T & 0\\
+		0 & 0 & 1 & 0 \\
+		0 & 0 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		\theta[n] \\
+		\omega[n] \\
+		\alpha[n] \\
+		b[n]
+	\end{bmatrix}
+	+
+	\begin{bmatrix}
+		0 \\
+		0 \\
+		1 \\
+		0
+	\end{bmatrix}
+	w_{rotational}[n]
+	\label{eq:ssrot-bias} \\
+	z_{rotational} = 
+	\begin{bmatrix}
+		0 & 1 & 0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		\theta \\
+		\omega \\
+		\alpha \\
+		b
+	\end{bmatrix}
+	+ v_{rotational} 
+	\label{eq:zrot-bias}
+\end{gather}
+
+در این پروژه لازم است تا صرفا الگوی «کلی» تغییرات شتاب خطی و الگوی «کلی» تغییرات سرعت زاویه‌ای مورد بررسی قرار گیرند. از این رو فرض‌های ذیل معقول‌اند:
+\begin{enumerate}
+	\item عبارت بایاس مقدار کوچکی است؛ از طرفی تأثیری نیز در الگوی تغییرات ندارد لذا می‌توان از آن صرف‌نظر کرد.
+	\item در تحلیل حرکت خطی، نیازی به تخمین موقعیت و سرعت نیست و صرفا شتاب اهمیت دارد، لذا می‌توان حالت‌های موقعیت و سرعت را از معادله‌ی حالت حذف کرد.
+	\item در تحیل حرکت دورانی نیازی به تخمین زاویه نیست و صرفا سرعت زاویه‌ای اهمیت دارد. لذا می‌توان حالت زاویه را از معادله‌ی حالت حذف کرد.
+\end{enumerate}
+
+\newpage
+با اعمال مفروضات فوق، معادلات حرکت خطی به شکل معادله‌ی \ref{eq:lin-final} و معادلات حرکت دورانی به شکل معادله‌ی \ref{eq:rot-final} در می‌آیند.
+
+\begin{gather}
+	a[n+1] = a[n] + w_{linear}[n] \nonumber
+	\\
+	z_{rotational} = a + v_{linear} 
+	\label{eq:lin-final}
+\end{gather}
+\begin{gather}
+	\begin{bmatrix}
+		\omega[n+1] \\
+		\alpha[n+1] 
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		1 & T \\
+		0 & 1
+	\end{bmatrix}
+	\begin{bmatrix}
+		\omega[n] \\
+		\alpha[n]
+	\end{bmatrix}
+	+
+	\begin{bmatrix}
+		0 \\
+		1
+	\end{bmatrix}
+	w_{rotational}[n] \nonumber
+	\\
+	z_{rotational} = 
+	\begin{bmatrix}
+		1 & 0
+	\end{bmatrix}
+	\begin{bmatrix}
+		\omega \\
+		\alpha
+	\end{bmatrix}
+	+ v_{rotational} 
+	\label{eq:rot-final}
+\end{gather}
+
+گام سوم طراحی معادلات کالمن برای دو سیستم بالا است. معادلات کالمن اینجوریه: با رفرنس
+
+سپس: از آنجا که سیستم‌ها متفاوت هستند، هرکدام به صورت جداگانه شرح داده می‌شوند.
+
+\section{ارتباطات} \label{sec:comm}
